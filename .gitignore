@@ -11,3 +11,5 @@ media/
 
 # Static files
 static/
+
+myvenv/
