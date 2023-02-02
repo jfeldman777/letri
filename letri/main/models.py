@@ -55,6 +55,8 @@ class Body(models.Model):
     birth_date = models.DateField('дата рождения',blank=True,null=True,)
     death_date = models.DateField('дата смерти',blank=True,null=True,)
 
+    birth_place = models.TextField('место рождения',blank=True,null=True,)
+
 
 
     def __str__(self):
