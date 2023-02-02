@@ -1,12 +1,20 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Body
+from .models import Body, Letter
+
+class SearchForm():
+    
+
+class LetterForm(ModelForm):
+    class Meta:
+        model = Letter
+        fields = "__all__"
 
 class BodyForm(ModelForm):
     class Meta:
         model = Body
-        fields = "__all__"
-#
+        #fields = "__all__"
+        exclude =("creator","flag_done",)
 # class VenueForm(ModelForm):
 #     class Meta:
 #         model = Venue

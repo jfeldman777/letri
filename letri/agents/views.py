@@ -6,10 +6,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 #from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
+from main.forms import BodyForm
+from main.views import add_body
 # Create your views here.
+
 def login_user(request):
+    form2 = BodyForm()
     if request.method =="POST":
-        username = request.POST['username']
+        try:
+            username = request.POST['username']
+        except:
+            return add_body(request)
+
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -19,7 +27,7 @@ def login_user(request):
             messages.success(request, ("Error login..."))
             return redirect('login')
     else:
-        return render(request,"authenticate/login.html",{})
+        return render(request,"registration/login.html",{"form2":form2})
 
 def logout_user(request):
     logout(request)

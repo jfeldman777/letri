@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Letter(models.Model):
+    first_name = models.CharField(max_length=20,blank=True,null=True)
+    middle_name = models.CharField(max_length=20,blank=True,null=True)
+    last_name = models.CharField(max_length=20,blank=True,null=True)
+    img = models.ImageField(null=True,blank=True,upload_to='images/')
+    txt = models.TextField(blank=True,null=True,)
+    phone = models.CharField('Contact Phone',max_length=9,blank=True,null=True,)
+    web = models.URLField('Website Address',blank=True,null=True,)
+    email_address = models.EmailField('Email Address',blank=True,null=True,)
+
 
 class Ethnos(models.Model):
     name = models.CharField(max_length=15)
@@ -37,15 +47,15 @@ class Body(models.Model):
     first_name = models.CharField(max_length=20)
     middle_name = models.CharField(max_length=20,blank=True,null=True)
     last_name = models.CharField(max_length=20)
-    region = models.ForeignKey(Region,null=True,on_delete=models.SET_NULL)
-    army = models.ForeignKey(Army,null=True,on_delete=models.SET_NULL)
+    region = models.ForeignKey(Region,blank=True,null=True,on_delete=models.SET_NULL)
+    army = models.ForeignKey(Army,blank=True,null=True,on_delete=models.SET_NULL)
     creator = models.ForeignKey(User,blank=True,null=True,on_delete=models.CASCADE)
     image = models.ImageField(null=True,blank=True,upload_to='images/')
 
-    education = models.ForeignKey(Education,null=True,on_delete=models.SET_NULL)
-    mobitype = models.ForeignKey(MobiType,null=True,on_delete=models.SET_NULL)
-    rang = models.ForeignKey(Rang,null=True,on_delete=models.SET_NULL)
-    ethnos = models.ForeignKey(Ethnos,null=True,on_delete=models.SET_NULL)
+    education = models.ForeignKey(Education,blank=True,null=True,on_delete=models.SET_NULL)
+    mobitype = models.ForeignKey(MobiType,blank=True,null=True,on_delete=models.SET_NULL)
+    rang = models.ForeignKey(Rang,blank=True,null=True,on_delete=models.SET_NULL)
+    ethnos = models.ForeignKey(Ethnos,blank=True,null=True,on_delete=models.SET_NULL)
 
     oririgin_img = models.ImageField('копия экрана',null=True,blank=True,upload_to='images/')
     origin_url = models.URLField('линк-источник',blank=True,null=True,)
@@ -60,4 +70,4 @@ class Body(models.Model):
 
 
     def __str__(self):
-        return self.first_name + ' ' + self.middle_name+ ' ' + self.last_name + ' (' + str(self.id) + ')'
+        return self.first_name +  ' ' + self.last_name + ' (' + str(self.id) + ')'

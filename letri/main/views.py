@@ -11,7 +11,7 @@ from datetime import datetime
 from django.http import HttpResponseRedirect, HttpResponse
 import csv
 
-from .forms import BodyForm
+from .forms import BodyForm,LetterForm
 
 from django.http import FileResponse
 import io
@@ -24,15 +24,58 @@ from django.core.paginator import Paginator
 def home(request):
     return render(request,'main/home.html')
 
+def volo(request):
+    return render(request,'main/volo.html')
+
+def search(request):
+    return render(request,'main/search.html')
+
+def letter(request):
+    submitted = False
+    if request.method == "POST":
+        form = LetterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/letter?submitted=True')
+    else:
+        form = LetterForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'main/letter.html',
+    {'form':form,
+    'submitted':submitted,})
+
+
+def search(request):
+    submitted = False
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/search?submitted=True')
+    else:
+        form = SearchForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'main/search.html',
+    {'form':form,
+    'submitted':submitted,})
+
+
+
 def add_body(request):
     submitted = False
+    form = BodyForm
+
     if request.method == "POST":
         form = BodyForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_body?submitted=True')
     else:
-        form = EventForm
+        form = BodyForm
         if 'submitted' in request.GET:
             submitted = True
 
