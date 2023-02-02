@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from .models import Body, Letter
 
 class SearchForm():
-    
+    pass
 
 class LetterForm(ModelForm):
     class Meta:
