@@ -18,8 +18,8 @@ class Body(models.Model):
     last_name = models.CharField(max_length=20)
     region = models.ForeignKey(Region,null=True,on_delete=models.SET_NULL)
     army = models.ForeignKey(Army,null=True,on_delete=models.SET_NULL)
-    creator = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/')
+    creator = models.ForeignKey(User,blank=True,null=True,on_delete=models.CASCADE)
+    image = models.ImageField(null=True,blank=True,upload_to='images/')
 
     def __str__(self):
         return self.first_name + ' ' + self.middle_name+ ' ' + self.last_name + ' (' + str(self.id) + ')'
