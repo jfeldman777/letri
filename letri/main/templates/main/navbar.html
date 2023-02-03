@@ -7,5 +7,45 @@ navbar-dark bg-primary">
     aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"
+           href="{% url 'home' %}">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"
+           href="{% url 'search' %}">Search</a>
+        </li>
+
+
+
+        <li class="nav-item">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#"
+          role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Export
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'csv' %}">Export CSV</a></li>
+            <li><a class="dropdown-item" href="{% url 'pdf' %}">Export pdf</a></li>
+          </ul>
+          <li class="nav-item">
+                  {% if user.is_authenticated  %}
+                        <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+{% if user.is_superuser %}
+  <li><a class="nav-link" href="/admin">Admin</a></li>
+{% endif %}
+                                {% else %}
+                                  <li class="nav-item">
+                          <a class="nav-link active" aria-current="page"
+                           href="{% url 'letter' %}">Volonteer</a>
+                        </li>
+                    <li><a class="nav-link" href="agents/login/">Login</a></li>
+            {% endif %}
+              </ul>
+
     </div>
+  </div>
 </nav>

@@ -1,3 +1,7 @@
+
+{% extends 'main/base.html' %}
+{% block content %}
+
 <ol>
   <li>Найти человека по фамилии</li>
   <form action="" method=POST>
@@ -17,3 +21,4 @@
   <a href="{% url "csv" %}">Экспорт для загрузки в электронные таблицы – формат CSV</a></li><li>
   <a href="{% url "search2" %}">Выбрать по критерию – выдать постранично | подсчитать | экспортировать</a></li>
 </ol>
+{% endblock %}
