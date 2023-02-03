@@ -1,1 +1,19 @@
-Поиск
+<ol>
+  <li>Найти человека по фамилии</li>
+  <form action="" method=POST>
+  {%  csrf_token  %}
+  <input type=text name=name value="" size="15"/>
+  <input type="submit" value="Submit" class="btn btn-secondary">
+  </form>
+  <li>
+  Выдать всю базу постранично</li>
+  <form action="" method=POST>
+  {%  csrf_token  %}
+  Размер страницы<input type=text name=page value="10" size="1"/>
+  <input type="submit" value="Submit" class="btn btn-secondary">
+  </form>
+  <li>
+  <a href="{% url "pdf" %}">Экспорт для печати – формат PDF</a></li><li>
+  <a href="{% url "csv" %}">Экспорт для загрузки в электронные таблицы – формат CSV</a></li><li>
+  <a href="{% url "search2" %}">Выбрать по критерию – выдать постранично | подсчитать | экспортировать</a></li>
+</ol>

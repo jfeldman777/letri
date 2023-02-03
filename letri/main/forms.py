@@ -3,7 +3,9 @@ from django.forms import ModelForm
 from .models import Body, Letter
 
 class SearchForm():
-    pass
+    class Meta:
+        model = Body
+        fields = ('first_name','last_name')
 
 class LetterForm(ModelForm):
     class Meta:

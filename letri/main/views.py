@@ -11,7 +11,7 @@ from datetime import datetime
 from django.http import HttpResponseRedirect, HttpResponse
 import csv
 
-from .forms import BodyForm,LetterForm
+from .forms import BodyForm,LetterForm, SearchForm
 
 from django.http import FileResponse
 import io
@@ -20,6 +20,20 @@ from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
 from django.core.paginator import Paginator
+def pdf(request):
+    return render(request,'main/home.html')
+
+def csv(request):
+    return render(request,'main/home.html')
+
+def pdf2(request):
+    return render(request,'main/home.html')
+
+def csv2(request):
+    return render(request,'main/home.html')
+
+def search2(request):
+    return render(request,'main/home.html')
 
 def home(request):
     return render(request,'main/home.html')
@@ -47,7 +61,7 @@ def letter(request):
     'submitted':submitted,})
 
 
-def search(request):
+def search3(request):
     submitted = False
     if request.method == "POST":
         form = SearchForm(request.POST)
@@ -62,8 +76,6 @@ def search(request):
     return render(request, 'main/search.html',
     {'form':form,
     'submitted':submitted,})
-
-
 
 def add_body(request):
     submitted = False
