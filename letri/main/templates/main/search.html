@@ -3,21 +3,21 @@
 {% block content %}
 
 <ol>
-  <li>Найти человека по фамилии</li>
+  <li>Найти человека по фамилии (Find person by Last name)</li>
   <form action="" method=POST>
   {%  csrf_token  %}
   <input type=text name=name value="" size="15"/>
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>
-  Выдать всю базу постранично</li>
+  Выдать всю базу постранично (Show all page by page)</li>
   <form action="" method=POST>
   {%  csrf_token  %}
-  Размер страницы<input type=text name=page value="10" size="1"/>
+  Размер страницы (Lines per page) <input type=text name=page value="10" size="1"/>
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>
-Выбрать по критерию</li>
+Выбрать по критерию (Search by complex criteria)</li>
 </ol>
 <form action="" method=POST>
 {%  csrf_token  %}
