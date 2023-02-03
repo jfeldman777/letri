@@ -2,10 +2,11 @@ from django import forms
 from django.forms import ModelForm
 from .models import Body, Letter
 
-class SearchForm():
+class SearchForm(ModelForm):
     class Meta:
         model = Body
-        fields = ('first_name','last_name')
+        fields = ('first_name','last_name','region','army',
+        'education','mobitype','rang','ethnos','birth_date','death_date')
 
 class LetterForm(ModelForm):
     class Meta:

@@ -23,6 +23,9 @@ from django.core.paginator import Paginator
 def pdf(request):
     return render(request,'main/home.html')
 
+def about(request):
+    return render(request,'main/about.html')
+
 def csv(request):
     return render(request,'main/home.html')
 
@@ -41,7 +44,7 @@ def home(request):
 def volo(request):
     return render(request,'main/volo.html')
 
-def search(request):
+def search3(request):
     return render(request,'main/search.html')
 
 def letter(request):
@@ -61,7 +64,8 @@ def letter(request):
     'submitted':submitted,})
 
 
-def search3(request):
+def search(request):
+    form = SearchForm
     submitted = False
     if request.method == "POST":
         form = SearchForm(request.POST)
@@ -74,7 +78,7 @@ def search3(request):
             submitted = True
 
     return render(request, 'main/search.html',
-    {'form':form,
+    {'form':form,"iam":"test",
     'submitted':submitted,})
 
 def add_body(request):

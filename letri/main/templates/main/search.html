@@ -17,6 +17,14 @@
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>
-  <a href="{% url "search2" %}">Выбрать по критерию – выдать постранично | подсчитать | экспортировать</a></li>
+Выбрать по критерию</li>
 </ol>
+<form action="" method=POST>
+{%  csrf_token  %}
+{{ form.as_p }}
+
+<input type="submit" value="Submit" class="btn btn-secondary">
+</form>
+
+
 {% endblock %}
