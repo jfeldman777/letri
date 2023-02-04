@@ -11,10 +11,10 @@
   </form>
   <li>
   Выдать всю базу постранично (Show all page by page)</li>
-  <form action="" method=POST>
-
-  Размер страницы (Lines per page) <input type=text name=page value="10" size="1"/>
-<input type="hidden" name="type" value="2">
+  <form action="all" method=POST>
+  {%  csrf_token  %}
+  Размер страницы (Lines per page)
+  <input type=text name=page value="10" size="1"/>
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>

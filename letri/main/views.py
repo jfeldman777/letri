@@ -22,6 +22,19 @@ from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter as LETTER
 
 from django.core.paginator import Paginator
+
+
+def all(request):
+        p = Paginator(Body.objects.all(), 3,)
+        page = request.GET.get('page')
+        bs = p.get_page(page)
+        nums = "a"*bs.paginator.num_pages
+
+        return render(request, 'main/all.html',
+        {
+        "nums":nums,
+        "b_list":bs})
+
 def pdf2(request):
     return render(request,'main/home.html')
 def about(request):
@@ -120,10 +133,6 @@ def add_body(request):
     {'form':form,
     'submitted':submitted,})
 
-
-class HomepageView(TemplateView):
-    template_name = 'main/home.html'
-
 def s1(request):
     name = request.POST.get('name','@')
     b_list = Body.objects.filter(last_name__contains=name)
@@ -168,6 +177,7 @@ def csv(request):
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from letri import settings
+
 def pdf(request):
     pdfmetrics.registerFont(TTFont("Arial", settings.STATICFILES_DIRS[0]+"/arial.ttf"))
     buf = io.BytesIO()
