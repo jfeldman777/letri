@@ -30,10 +30,10 @@ def all(request):
         bs = p.get_page(page)
         nums = "a"*bs.paginator.num_pages
 
-        return render(request, 'main/all.html',
+        return render(request, 'main/pages.html',
         {
         "nums":nums,
-        "b_list":bs})
+        "bs":bs})
 
 def pdf2(request):
     return render(request,'main/home.html')

@@ -1,0 +1,80 @@
+
+{% extends 'main/base.html' %}
+{% block content %}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+{% if bs.has_previous %}
+<li class="page-item  " >
+<a  class="page-link"  href="?page=1"> &laquo First </a></li>
+<li class="page-item">
+<a  class="page-link"  href="?page={{ bs.previous_page_number }}">Previous</a></li>
+{% endif %}
+<!--li class="page-item disabled">
+  <a  class="page-link"  href="#">
+Page {{ venues.number }} of {{ venues.paginator.num_pages}}
+</a>
+</li--->
+{% for i in nums  %}
+  {% if forloop.counter == bs.number %}
+  <li class="page-item disabled ">
+   {% else %}
+  <li class= "page-item">
+  {% endif %}
+
+
+      <a class="page-link" href="?page={{ forloop.counter }}">
+    {{ forloop.counter }}</a>
+      </li>
+{% endfor %}
+
+{% if bs.has_next %}
+<li class="page-item">
+<a  class="page-link" href="?page={{ bs.next_page_number }}">Next</a>
+</li>
+
+<li class="page-item">
+<a  class="page-link" href="?page={{  bs.paginator.num_pages}}">Last  &raquo </a></li>
+
+{% endif %}
+</nav>
+
+<h1>...</h1>
+<table class="table table-striped" >
+{% for b in bs %}
+<tr>
+<td>{{b.last_name}}</td>
+
+</tr>
+{% endfor %}
+</table>
+<br/><br/>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+
+
+{% if bs.has_previous %}
+<li class="page-item  " >
+<a  class="page-link"  href="?page=1"> &laquo First </a></li>
+<li class="page-item">
+<a  class="page-link"  href="?page={{ bs.previous_page_number }}">Previous</a></li>
+{% endif %}
+<li class="page-item disabled">
+  <a  class="page-link"  href="#">
+Page {{ bs.number }} of {{ bs.paginator.num_pages}}
+</a>
+</li>
+{% if bs.has_next %}
+<li class="page-item">
+<a  class="page-link" href="?page={{ bs.next_page_number }}">Next</a>
+</li>
+<li class="page-item">
+<a  class="page-link" href="?page={{  venubses.paginator.num_pages}}">Last  &raquo </a></li>
+
+{% endif %}
+
+</ul>
+</nav>
+
+{% endblock %}
