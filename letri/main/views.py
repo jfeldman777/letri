@@ -19,10 +19,10 @@ from django.http import FileResponse
 import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import letter as LETTER
 
 from django.core.paginator import Paginator
-def pdf(request):
+def pdf2(request):
     return render(request,'main/home.html')
 def about(request):
     return render(request,'main/about.html')
@@ -46,7 +46,7 @@ def b(request):
 def c(request):
     return render(request,'main/c.html')
 
-def csv(request):
+def csv2(request):
     return render(request,'main/home.html')
 
 def pdf2(request):
@@ -131,3 +131,75 @@ def s1(request):
         {
             "b_list":b_list,'name':name,
         })
+
+
+################
+from django.shortcuts import render,redirect
+import calendar
+from calendar import HTMLCalendar
+from datetime import datetime
+
+from django.http import HttpResponseRedirect, HttpResponse
+import csv as CSV
+
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+#from reportlab.lib.pagesizes import letter
+
+from django.core.paginator import Paginator
+import  django.utils.encoding
+
+def csv(request):
+    bs = Body.objects.all()
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition']='attachment;filename=data.csv'
+    response.write(u'\ufeff'.encode('utf8'))
+    writer = CSV.writer(response)
+
+    writer.writerow(['first_name','middle_name','last_name'])
+    for b in bs:
+        writer.writerow([b.first_name,b.middle_name,b.last_name])
+    return response
+
+#from fontTools.ttLib import TTFont
+
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from letri import settings
+def pdf(request):
+    pdfmetrics.registerFont(TTFont("Arial", settings.STATICFILES_DIRS[0]+"/arial.ttf"))
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf,pagesize=LETTER,bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch,inch)
+
+    #font = TTFont(settings.STATICFILES_DIRS[0]+"/arial.ttf")
+    font_name = "Arial"
+    textob.setFont(font_name,14)
+    #
+    bs = Body.objects.all()
+    lines = []
+    for b in bs:
+        lines.append(b.first_name+" "+b.last_name)
+        lines.append(" ")
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf,as_attachment=True,filename="data.pdf",)
+
+# def fetch_pdf_resources(uri, rel):
+#     if uri.find(settings.MEDIA_URL) != -1:
+#         path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ''))
+#     elif uri.find(settings.STATIC_URL) != -1:
+#         path = os.path.join(settings.STATIC_ROOT, uri.replace(settings.STATIC_URL, ''))
+#     else:
+#         path = None
+#     return path
