@@ -5,13 +5,15 @@ from django.shortcuts import render,redirect
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-#from .models import Event,Venue
 
-#from .forms import VenueForm, EventForm
+from django.views.generic import TemplateView, ListView
+from .forms import SearchForm1
+
 from django.http import HttpResponseRedirect, HttpResponse
 import csv
 
 from .forms import BodyForm,LetterForm, SearchForm
+from .models import Body
 
 from django.http import FileResponse
 import io
@@ -22,9 +24,27 @@ from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
 def pdf(request):
     return render(request,'main/home.html')
-
 def about(request):
     return render(request,'main/about.html')
+
+def s1(request,name):
+
+    return render(request,'main/s1.html')
+
+def s2(request):
+    return render(request,'main/a.html')
+
+def s(request):
+    return render(request,'main/a.html')
+
+def a(request):
+    return render(request,'main/a.html')
+
+def b(request):
+    return render(request,'main/b.html')
+
+def c(request):
+    return render(request,'main/c.html')
 
 def csv(request):
     return render(request,'main/home.html')
@@ -65,6 +85,7 @@ def letter(request):
 
 
 def search(request):
+    form1 = SearchForm1
     form = SearchForm
     submitted = False
     if request.method == "POST":
@@ -78,7 +99,7 @@ def search(request):
             submitted = True
 
     return render(request, 'main/search.html',
-    {'form':form,"iam":"test",
+    {'form':form,"form1":form1,
     'submitted':submitted,})
 
 def add_body(request):
@@ -98,3 +119,15 @@ def add_body(request):
     return render(request, 'main/add_body.html',
     {'form':form,
     'submitted':submitted,})
+
+
+class HomepageView(TemplateView):
+    template_name = 'main/home.html'
+
+def s1(request):
+    name = request.POST.get('name','@')
+    b_list = Body.objects.filter(last_name__contains=name)
+    return render(request, 'main/s1.html',
+        {
+            "b_list":b_list,'name':name,
+        })

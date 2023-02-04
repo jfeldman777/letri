@@ -2,6 +2,9 @@ from django import forms
 from django.forms import ModelForm
 from .models import Body, Letter
 
+class SearchForm1(forms.Form):
+    q = forms.CharField(label='last name', max_length=15)
+
 class SearchForm(ModelForm):
     class Meta:
         model = Body

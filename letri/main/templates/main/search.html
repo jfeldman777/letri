@@ -4,7 +4,7 @@
 
 <ol>
   <li>Найти человека по фамилии (Find person by Last name)</li>
-  <form action="" method=POST>
+  <form action="s1" method=POST>
   {%  csrf_token  %}
   <input type=text name=name value="" size="15"/>
   <input type="submit" value="Submit" class="btn btn-secondary">
@@ -12,8 +12,9 @@
   <li>
   Выдать всю базу постранично (Show all page by page)</li>
   <form action="" method=POST>
-  {%  csrf_token  %}
+
   Размер страницы (Lines per page) <input type=text name=page value="10" size="1"/>
+<input type="hidden" name="type" value="2">
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>
@@ -22,7 +23,7 @@
 <form action="" method=POST>
 {%  csrf_token  %}
 {{ form.as_p }}
-
+<input type="hidden" name="type" value="3">
 <input type="submit" value="Submit" class="btn btn-secondary">
 </form>
 
