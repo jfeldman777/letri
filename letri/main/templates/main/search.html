@@ -11,10 +11,10 @@
   </form>
   <li>
   Выдать всю базу постранично (Show all page by page)</li>
-  <form action="all" method=POST>
+  <form action="all" method=GET>
   {%  csrf_token  %}
   Размер страницы (Lines per page)
-  <input type=text name=page value="10" size="1"/>
+  <input type=text name=np value="10" size="1"/>
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>
@@ -23,7 +23,7 @@
 <form action="" method=POST>
 {%  csrf_token  %}
 {{ form.as_p }}
-<input type="hidden" name="type" value="3">
+<input type="hidden" name="np" value="{{np}}">
 <input type="submit" value="Submit" class="btn btn-secondary">
 </form>
 

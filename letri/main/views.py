@@ -25,15 +25,20 @@ from django.core.paginator import Paginator
 
 
 def all(request):
-        p = Paginator(Body.objects.all(), 3,)
+
+        np = request.GET.get('np')
+        p = Paginator(Body.objects.all(), np)
         page = request.GET.get('page')
+
+
+
         bs = p.get_page(page)
         nums = "a"*bs.paginator.num_pages
 
         return render(request, 'main/pages.html',
         {
         "nums":nums,
-        "bs":bs})
+        "bs":bs, 'np':np})
 
 def pdf2(request):
     return render(request,'main/home.html')
