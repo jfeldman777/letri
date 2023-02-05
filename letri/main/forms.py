@@ -9,7 +9,9 @@ class SearchForm(ModelForm):
     class Meta:
         model = Body
         fields = ('region','army',
-        'education','mobitype','rang','ethnos','birth_date','death_date')
+        'education','mobitype','rang','ethnos'
+        #,'birth_date','death_date'
+        )
 
 class LetterForm(ModelForm):
     class Meta:
