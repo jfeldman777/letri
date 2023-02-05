@@ -26,7 +26,7 @@ from django.core.paginator import Paginator
 
 def all(request):
     np = request.GET.get('np')
-    p = Paginator(Body.objects.all(), np)
+    p = Paginator(Body.objects.filter(flag_done=True), np)
     page = request.GET.get('page')
 
 
@@ -83,7 +83,7 @@ def s2(request):
         qs = qs.filter(ethnos=ethnos)
 
     birth_date=request.POST.get('birth_date')
-    
+
 
     death_date=request.POST.get('death_date')
 
@@ -185,7 +185,7 @@ def add_body(request):
 
 def s1(request):
     name = request.POST.get('name','@')
-    b_list = Body.objects.filter(last_name__contains=name)
+    b_list = Body.objects.filter(last_name__contains=name,flag_done=True)
     return render(request, 'main/s1.html',
         {
             "b_list":b_list,'name':name,
