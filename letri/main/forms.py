@@ -8,7 +8,7 @@ class SearchForm1(forms.Form):
 class SearchForm(ModelForm):
     class Meta:
         model = Body
-        fields = ('first_name','last_name','region','army',
+        fields = ('region','army',
         'education','mobitype','rang','ethnos','birth_date','death_date')
 
 class LetterForm(ModelForm):

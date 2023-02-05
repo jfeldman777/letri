@@ -25,17 +25,16 @@ from django.core.paginator import Paginator
 
 
 def all(request):
-
-        np = request.GET.get('np')
-        p = Paginator(Body.objects.all(), np)
-        page = request.GET.get('page')
-
+    np = request.GET.get('np')
+    p = Paginator(Body.objects.all(), np)
+    page = request.GET.get('page')
 
 
-        bs = p.get_page(page)
-        nums = "a"*bs.paginator.num_pages
 
-        return render(request, 'main/pages.html',
+    bs = p.get_page(page)
+    nums = "a"*bs.paginator.num_pages
+
+    return render(request, 'main/pages.html',
         {
         "nums":nums,
         "bs":bs, 'np':np})
@@ -50,10 +49,58 @@ def s1(request,name):
     return render(request,'main/s1.html')
 
 def s2(request):
-    return render(request,'main/a.html')
+    qt="";
+    qs = Body.objects.filter(flag_done=True)
+
+    region=request.POST.get('region')
+    if region!='':
+        qt+='// регион = '+region
+        qs = qs.filter(region=region)
+
+    army=request.POST.get('army')
+    if army!='':
+        qt+='// вид войск '+army
+        qs = qs.filter(army=army)
+
+    education=request.POST.get('education')
+    if education!='':
+        qt+='// образование '+education
+        sq = qs.filter(education=education)
+
+    mobitype=request.POST.get('mobitype')
+    if mobitype!='':
+        qt+='// тип мобилизации '+mobitype
+        qs = qs.filter(mobitype=mobitype)
+
+    rang=request.POST.get('rang')
+    if rang!='':
+        qt+='// звание '+rang
+        qs = qs.filter(rang=rang)
+
+    ethnos=request.POST.get('ethnos')
+    if ethnos!='':
+        qt+='// этнос '+ethnos
+        qs = qs.filter(ethnos=ethnos)
+
+    birth_date=request.POST.get('birth_date')
+    
+
+    death_date=request.POST.get('death_date')
+
+
+    count=qs.count()
+    return render(request,'main/s.html',{'qt':qt,'count':count})
 
 def s(request):
-    return render(request,'main/a.html')
+    p = request.POST.get('np')
+
+    return render(request, 'main/pages.html',
+        {
+        "nums":nums,
+        "bs":bs, 'np':np})
+
+
+    return render(request,'main/s.html')
 
 def a(request):
     return render(request,'main/a.html')
@@ -103,8 +150,6 @@ def letter(request):
 
 
 def search(request):
-    form1 = SearchForm1
-    form = SearchForm
     submitted = False
     if request.method == "POST":
         form = SearchForm(request.POST)
@@ -117,7 +162,7 @@ def search(request):
             submitted = True
 
     return render(request, 'main/search.html',
-    {'form':form,"form1":form1,
+    {'form':form,
     'submitted':submitted,})
 
 def add_body(request):

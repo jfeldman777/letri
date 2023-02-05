@@ -44,7 +44,7 @@ class Army(models.Model):
         return self.name + ' (' + str(self.id) + ')'
 
 class Body(models.Model):
-    first_name = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=20,blank=True,null=True)
     middle_name = models.CharField(max_length=20,blank=True,null=True)
     last_name = models.CharField(max_length=20)
     region = models.ForeignKey(Region,blank=True,null=True,on_delete=models.SET_NULL)

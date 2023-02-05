@@ -1,13 +1,9 @@
 
 {% extends 'main/base.html' %}
 {% block content %}
-<h1>Search results #1</h1>
-<ul>
+<h1>Сколько их</h1>
 
-{% for b in b_list %}
-<li>
-{{ b.last_name}}
-</li>
-{% endfor %}
-</ul>
+Запрос: {{qt}}
+<hr>
+Количество {{ count }}
 {% endblock %}

@@ -10,7 +10,7 @@ urlpatterns = [
     path('c',views.c,name='c'),
 
     #path('s1/<str:name>',views.s1,name='s1'),
-    #path('s2',views.b,name='b'),
+    path('s2',views.s2,name='s2'),
     #path('',views.c,name='c'),
 
     path('volo',views.volo,name='volo'),

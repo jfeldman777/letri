@@ -18,9 +18,10 @@
   <input type="submit" value="Submit" class="btn btn-secondary">
   </form>
   <li>
-Выбрать по критерию (Search by complex criteria)</li>
+Выбрать по критерию = только количество (Search by complex criteria = only count)
+</li>
 </ol>
-<form action="" method=POST>
+<form action="s2" method=POST>
 {%  csrf_token  %}
 {{ form.as_p }}
 <input type="hidden" name="np" value="{{np}}">
