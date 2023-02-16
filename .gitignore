@@ -14,3 +14,9 @@ media/
 
 myvenv/
 db.*
+
+Lib/
+Scripts/
+Include/
+share
+pyvenv.*
