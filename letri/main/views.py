@@ -135,7 +135,7 @@ def search3(request):
 def letter(request):
     submitted = False
     if request.method == "POST":
-        form = LetterForm(request.POST)
+        form = LetterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/letter?submitted=True')
@@ -167,10 +167,10 @@ def search(request):
 
 def add_body(request):
     submitted = False
-    form = BodyForm
+    #form = BodyForm
 
     if request.method == "POST":
-        form = BodyForm(request.POST)
+        form = BodyForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_body?submitted=True')

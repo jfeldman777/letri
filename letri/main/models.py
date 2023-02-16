@@ -70,4 +70,5 @@ class Body(models.Model):
 
 
     def __str__(self):
-        return self.first_name +  ' ' + self.last_name + ' (' + str(self.id) + ')'
+        #return self.first_name +  ' ' + self.last_name + ' (' + str(self.id) + ')'
+        return self.last_name + ' (' + str(self.id) + ')'
